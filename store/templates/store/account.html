@@ -180,7 +180,7 @@
             <div class="profile-intro">
               <div class="profile-author">
                 <a href="#"
-                  ><img src="{% if customer.picture %} {{customer.picture.url}} {%else%} {% static 'images/02.png'%} {%endif%}" alt="01"
+                  ><img src="{% if customer.picture %}{{customer.picture.url}}{%else%}{% static 'images/02.png'%}{%endif%}" alt="01"
                 /></a>
                 <h4>{{customer.first_name}} {{customer.last_name}}</h4>
                 <p><span>Joined:</span>{{customer.joined|date:"M j, Y"}}</p>
