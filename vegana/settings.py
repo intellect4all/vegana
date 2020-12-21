@@ -25,9 +25,9 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://vegana.herokuapp.com/', 'localhost:8000']
+ALLOWED_HOSTS = ['vegana.herokuapp.com', 'localhost']
 
-LOGIN_REDIRECT_URL = 'https://vegana.herokuapp.com/'
+LOGIN_REDIRECT_URL = 'vegana.herokuapp.com'
 # Application definition
 
 INSTALLED_APPS = [
