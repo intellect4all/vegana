@@ -10,6 +10,7 @@ django-allauth = "*"
 django-phonenumber-field = {extras = ["phonenumbers"], version = "*"}
 gunicorn = "*"
 whitenoise = "*"
+requests = "*"
 
 [dev-packages]
 pylama = "*"

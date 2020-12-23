@@ -1,7 +1,7 @@
 
-from typing import Union
+import requests, json
 from django.contrib.auth import login
-from django.http import request
+from django.http import request, response
 from django.utils import timezone
 from django.shortcuts import get_object_or_404, redirect, render, get_list_or_404
 # from django.template import context
@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import *
 import string, uuid
+from django.conf import settings
 
 # Create your views here.
 
@@ -430,9 +431,7 @@ class paystack(View, LoginRequiredMixin):
         try:
             order_qs = Order.objects.filter(user=self.request.user, ordered=False)
             order = order_qs[0]
-            print(order)
             if order.details:
-                print(order.details)
                 if order.details.payment == 'PS':
                     print(order.details.payment)
                     order_items = order.items.all()
@@ -659,3 +658,36 @@ class Account(View, LoginRequiredMixin):
             msg = "Something went wrong. Please try updating again."
             messages.info(self.request, msg)
             return redirect('store:account')
+
+class PaystackVerification(View, LoginRequiredMixin):
+    def get(self, *args, **kwargs):
+        tx_ref = self.request.GET.get('tx_ref', '')
+        transaction_id = self.request.GET.get('transaction_id', '')
+        status = self.request.GET.get('status', '')
+        orders = Order.objects.all()
+        order = orders[0]
+
+        url = f'https://api.flutterwave.com/v3/transactions/{transaction_id}/verify'
+        headers={
+            'Content-Type': 'application/json',
+            'Authorization': settings.FLUTTER_SECRET_KEY,
+        }
+        res = requests.get(url, headers=headers)
+        
+        response = res.json()
+        if response['status'] == 'success' and response['data']['tx_ref'] == order.ref:
+            order.ordered=True
+            order.ordered_date = timezone.now()
+            order_items = order.items.all()
+            for item in order_items:
+                item.ordered=True
+                item.save()
+            order.save()
+            msg = f"Your order with reference: {tx_ref} has been verified and being processed for delivery. Thanks"
+            messages.info(self.request, msg)
+            return redirect('store:home')
+        else:
+            msg = f"Your order with reference: {tx_ref} is not yet verified. Please save this Transaction id: {transaction_id} for record process."
+            messages.info(self.request, msg)
+            return redirect('store:home')
+        

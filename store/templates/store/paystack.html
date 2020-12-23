@@ -6,6 +6,8 @@
 
 {% block content %}
 
+<script src="https://checkout.flutterwave.com/v3.js"></script>
+
 <section class="single-banner">
   <div class="container">
     <div class="row">
@@ -81,10 +83,43 @@
     <form action="" id="paymentForm" method="post">
       {% csrf_token %}
       <div class="check-order-btn">
-          <button class="btn btn-inline " style="margin-top: 20px;" type="submit">Click here Pay with Paystack</button>
+          <button class="btn btn-inline " style="margin-top: 20px;" type="button" onClick="makePayment()">Click here Pay with Paystack</button>
       </div>
     </form>
   </div>
 </section>
 
+<script>
+  function makePayment() {
+    FlutterwaveCheckout({
+      public_key: "FLWPUBK_TEST-88d541ad7d3c9776a006f3d0611d5d98-X",
+      tx_ref: "{{order.ref}}",
+      amount: {{order.get_final_price}},
+      currency: "NGN",
+      country: "NG",
+      payment_options: "card, account, ussd",
+      redirect_url: // specified redirect URL
+        "http://localhost:8000/checkout/paystack/verification/",
+      meta: {
+        consumer_id: 23,
+        consumer_mac: "92a3-912ba-1192a",
+      },
+      customer: {
+        email: "{{request.user.email}}",
+        name: "{{request.user.username}}",
+      },
+      callback: function (data) {
+        console.log(data);
+      },
+      onclose: function() {
+        // close modal
+      },
+      customizations: {
+        title: "Vegana Store",
+        description: "Payment for items in cart",
+        logo: "{% static 'static/assets/images/logo/01.png' %}",
+      },
+    });
+  }
+</script>
 {% endblock content %}

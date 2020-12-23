@@ -43,5 +43,6 @@ urlpatterns = [
 
     # Payment urls
     path('checkout/paystack/', views.paystack.as_view(), name="paystack"),
+    path('checkout/paystack/verification/', views.PaystackVerification.as_view(), name="paystack-verification"),
 
 ]

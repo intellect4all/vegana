@@ -1,0 +1,49 @@
+	/*
+  	Flaticon icon font: Flaticon
+  	Creation date: 11/11/2020 12:43
+  	*/
+
+@font-face {
+  font-family: "Flaticon";
+  src: url("../../../fonts/flaticon/index.html");
+  src: url("../../../fonts/flaticon/indexd41d.html?#iefix") format("embedded-opentype"),
+       url("../../../fonts/flaticon/Flaticon.woff2") format("woff2"),
+       url("../../../fonts/flaticon/Flaticon.woff") format("woff"),
+       url("../../../fonts/flaticon/Flaticon.ttf") format("truetype"),
+       url("../../../fonts/flaticon/Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("../../../fonts/flaticon/Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+  font-style: normal;
+}
+
+.flaticon-groceries:before { content: "\f100"; }
+.flaticon-bread:before { content: "\f101"; }
+.flaticon-drinks:before { content: "\f102"; }
+.flaticon-vegetable:before { content: "\f103"; }
+.flaticon-milk:before { content: "\f104"; }
+.flaticon-spread:before { content: "\f105"; }
+.flaticon-cheese:before { content: "\f106"; }
+.flaticon-healthy-food:before { content: "\f107"; }
+.flaticon-salad:before { content: "\f108"; }
+.flaticon-delivery-truck:before { content: "\f109"; }
+.flaticon-save-money:before { content: "\f10a"; }
+.flaticon-customer-service:before { content: "\f10b"; }
+.flaticon-nuts:before { content: "\f10c"; }
+.flaticon-tofu:before { content: "\f10d"; }
+.flaticon-seaweed:before { content: "\f10e"; }
+.flaticon-marmite:before { content: "\f10f"; }
+.flaticon-express-pot:before { content: "\f110"; }
+.flaticon-cereal:before { content: "\f111"; }
+.flaticon-peas:before { content: "\f112"; }
