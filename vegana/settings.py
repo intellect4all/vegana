@@ -24,7 +24,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 FLUTTER_SECRET_KEY = os.environ['FLUTTER_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['vegana.herokuapp.com', 'localhost']
 
